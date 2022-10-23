@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Lynyx\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Lynyx\\.nuget\\packages"
+    ]
+  }
+}
