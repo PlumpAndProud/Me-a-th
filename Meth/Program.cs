@@ -12,6 +12,7 @@ namespace Meth
 
             Console.WriteLine("Halo watchu want?");
             Console.WriteLine("1. Simple calculator!");
+            Console.WriteLine("69. Close program!");
 
             int variable = Int32.Parse(Console.ReadLine());
 
@@ -23,22 +24,30 @@ namespace Meth
                 {
                     Console.WriteLine("So watchu want?");
                     Console.WriteLine("1. Simple calculator!");
-
-                    variable = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("69. Close program!");
+                    
                 }
                 else if(error == 0)
                 {
                     Console.WriteLine("Is that all?");
                     Console.WriteLine("1. No?");
-                    Console.WriteLine("69. Yes?");
+                    Console.WriteLine("2. Yes?");
 
-                    variable = Int32.Parse(Console.ReadLine());
                 }
+
+                variable = Int32.Parse(Console.ReadLine());
+                if (variable == 2)
+                {
+                    Environment.Exit(0);
+                }
+
 
                 error = MyPurpose(variable);
             }
         }
 
+        // MyPurpose
+        //
         // Input: 
         // variable - user input selecting programme
         //
@@ -57,10 +66,6 @@ namespace Meth
                         Calculator();
                         return 0;
                     }
-                case 69:
-                    {
-                        return 69;
-                    }
                 default:
                     {
                         Console.WriteLine("Whot, that must've been a missinput");
@@ -71,20 +76,34 @@ namespace Meth
 
         public static void Calculator()
         {
+            short operation = 0;
+
             Console.WriteLine("Welcome to Simple Calculator." + "\nType in your equation.");
 
             string userInput = Console.ReadLine();
 
-            char[] userInputInChars = userInput.ToCharArray();
+            while (operation == 0)
+            {   
+                char[] userInputArray = userInput.ToCharArray();
 
-            short operation = whatOperation(userInputInChars);
+                operation = whatOperation(userInputArray);
+
+                if (operation == 0)
+                {
+                    Console.WriteLine("Something went wrong please type your equation once again.");
+                    userInput = Console.ReadLine();
+                }
+            }
         }
 
+        // whatOperation
+        //
         // Input: 
         // userInput - user input of equation eg. 12 + 12
         //
         // Output:
         // short operation: 
+        //      0 - error
         //      1 - +
         //      2 - -
         //      3 - * 
@@ -92,42 +111,66 @@ namespace Meth
         //      5 - ^
         public static short whatOperation(char[] userInput)
         {
-            
-                int numberOfInput = userInput.Count();
+            int numberOfInput = userInput.Count();
 
-                for(int i = 0; i <= numberOfInput; i++)
+                for(int i = 0; i < numberOfInput; i++)
                 {
-                    switch (userInput[i])
+                    
+                switch (userInput[i])
                     {
+
                         case '+':
                             {
+                                if(userInput[i + 1] == ' ')
+                                {
                                 Console.WriteLine("Its addition");
                                 return 1;
+                                }
+                            break;
                             }
                         case '-':
                             {
+                            if (userInput[i + 1] == ' ')
+                                {
                                 Console.WriteLine("Its subtraction");
                                 return 2;
+                                }
+                            break;
                             }
                         case '*':
                             {
+                            if (userInput[i + 1] == ' ')
+                            {
                                 Console.WriteLine("Its multiplication");
                                 return 3;
+                            }  
+                            break;
                             }
                         case '/':
+                            {
+                            if (userInput[i + 1] == ' ')
                             {
                                 Console.WriteLine("Its division");
                                 return 4;
                             }
+                            break;
+                            }
                         case '^':
+                            {
+                            if (userInput[i + 1] == ' ')
                             {
                                 Console.WriteLine("Its powering");
                                 return 5;
                             }
+                            break;
+                            }
                     }
                 }
+            
             return 0;
         }
 
     }
+
+
 }
